@@ -3,3 +3,5 @@
 Alle Angaben sind freiwillig. Im Profil erscheinen nur die Felder, die nicht leer sind.
 
 Screen-Name, Anmeldename sowie das Kennwort lassen sich im Benutzermenü unter Einstellungen ändern.
+
+Wenn du deinen bürgerlichen Namen entfernen oder ändern willst schreib eine Mail an <a href="mailto:support@liquid-erfurt.org">support@liquid-erfurt.org

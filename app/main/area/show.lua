@@ -11,7 +11,7 @@ slot.select("head", function()
 end)
 
 ui.container{
-  attr = { class = "vertical"},
+  attr = { class = "vertical area_desc"},
   content = function()
     ui.field.text{ value = area.description }
   end

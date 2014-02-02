@@ -2,13 +2,25 @@ slot.select('navigation', function()
 
   ui.link{
     content = function()
-      ui.tag{ attr = { class = "logo_liquidfeedback" }, content = _"LiquidFeedback" }
-      slot.put(" &middot; ")
-      ui.tag{ content = config.instance_name }
+      ui.image{ attr = { alt = "LiquidErfurt Logo", id = "lqef_logo_img" }, external = "/static/logo.png" }
     end,
+    attr = { id = "lqef_logo_link" },
     module = 'index',
     view   = 'index'
   }
+  
+  if app.session.member then
+    ui.link{
+      text = "Jetzt Abstimmen",
+      module = 'index',
+      view = 'index',
+      params = {
+        tab = "open",
+        filter = "frozen",
+        filter_voting = "not_voted"
+      }
+    }
+  end
   
   if app.session:has_access("anonymous") then
 
