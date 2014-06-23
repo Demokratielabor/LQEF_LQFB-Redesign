@@ -78,7 +78,7 @@ config.public_access = "anonymous"
 
 -- List of enabled languages, defaults to available languages
 -- ------------------------------------------------------------------------
--- config.enabled_languages = { 'en', 'de', 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
+config.enabled_languages = { 'en', 'de' }
 
 -- Default language, defaults to "en"
 -- ------------------------------------------------------------------------
