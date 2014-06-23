@@ -1,9 +1,4 @@
--- ========================================================================
--- MANDATORY (MUST BE CAREFULLY CHECKED AND PROPERLY SET!)
--- ========================================================================
-
--- Anpassungen für LQEF
--- ------------------------------------------------------------------------
+-- === Anpassungen für LQEF ===
 -- config.locked_profile_fields = { realname = true }
 
 
@@ -14,7 +9,7 @@ config.instance_name = "Liquid Erfurt"
 
 -- Information about service provider (HTML)
 -- ------------------------------------------------------------------------
-config.app_service_provider = "Liquid Erfurt e.V.<br/>Am Angerberg 1<br />99084 Erfurt<br /><br />Vertreten durch:<br />Thomas Sänger"
+config.app_service_provider = "Liquid Erfurt e.V.<br/>Am Angerberg 1<br />99084 Erfurt<br /><br />Vertreten durch:<br />Philipp Lehmann"
 
 
 -- A rocketwiki formatted text the user has to accept while registering
@@ -212,8 +207,7 @@ if cgi then collectgarbage("stop") end
 -- uncomment the following line to enable debug trace
 --config.enable_debug_trace = true
 
--- ========================================================================
--- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)
--- ========================================================================
+
 
 execute.config("init")
+config.app_version = "2.2.2-lqef"
