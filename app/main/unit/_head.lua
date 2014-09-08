@@ -15,7 +15,7 @@ ui.container{ attr = { class = "unit_head" }, content = function()
     if not config.single_unit_id then
       ui.link{ 
         module = "unit", view = "show", id = unit.id,
-        attr = { class = "unit_name" }, content = "Gliederungsebene: " .. unit.name
+        attr = { class = "unit_name" }, content = _("unit") .. ": " .. unit.name
       }
     else
       ui.link{ 

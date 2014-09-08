@@ -19,7 +19,7 @@ ui.container{ attr = { class = "area_head" }, content = function()
     -- area name
     ui.link{
       module = "area", view = "show", id = area.id,
-      attr = { class = "area_name" }, content = "Themengebiete: " .. area.name
+      attr = { class = "area_name" }, content = _("area") .. ": " .. area.name
     }
   end }
   
