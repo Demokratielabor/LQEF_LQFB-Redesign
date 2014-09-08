@@ -91,7 +91,7 @@ config.delegation_warning_time = '6 months'
 
 -- Prefix of all automatic mails, defaults to "[Liquid Feedback] "
 -- ------------------------------------------------------------------------
--- config.mail_subject_prefix = "[LiquidErfurt] "
+config.mail_subject_prefix = "[LiquidErfurt]"
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------
