@@ -143,12 +143,12 @@ filters.content = function()
         ui.container{ attr = { class = "content" }, content = function()
           ui.link{
             module = "unit", view = "show", id = event.issue.area.unit_id,
-            attr = { class = "unit_link" }, text = "Gliederungsebene: " .. event.issue.area.unit.name
+            attr = { class = "unit_link" }, text = _("unit") .. ": " .. event.issue.area.unit.name
           }
           slot.put(" ")
           ui.link{
             module = "area", view = "show", id = event.issue.area_id,
-            attr = { class = "area_link" }, text = "Themengebiet: " .. event.issue.area.name
+            attr = { class = "area_link" }, text = _("area") .. ": " .. event.issue.area.name
           }
         end }
         
