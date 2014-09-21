@@ -3,6 +3,8 @@ local member = param.get("member", "table")
 
 local show_content = param.get("show_content", atom.boolean)
 
+local detailview = param.get("detailview")
+
 if app.session.member_id then
   unit:load_delegation_info_once_for_member_id(app.session.member_id)
 end
@@ -17,7 +19,9 @@ ui.container{ attr = { class = "unit_head" }, content = function()
         module = "unit", view = "show", id = unit.id,
         attr = { class = "unit_name" }, content = _("unit") .. ": " .. unit.name
       }
-      slot.put("<br /><i>" .. unit.description .. "</i>")
+      if not detailview then
+        slot.put("<br /><i>" .. unit.description .. "</i>")
+      end
     else
       ui.link{ 
         module = "unit", view = "show", id = unit.id,
