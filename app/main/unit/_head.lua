@@ -27,7 +27,9 @@ ui.container{ attr = { class = "unit_head" }, content = function()
         module = "unit", view = "show", id = unit.id,
         attr = { class = "unit_name" }, content = _"LiquidFeedback" .. " &middot; " .. config.instance_name
       }
-      slot.put("<br /><i>" .. unit.description .. "</i>")
+      if not detailview then
+        slot.put("<br /><i>" .. unit.description .. "</i>")
+      end
     end
   end }
 
