@@ -3,7 +3,7 @@ local member = param.get("member", "table")
 
 local show_content = param.get("show_content", atom.boolean)
 
-local detailview = param.get("detailview")
+local detailview = param.get("detailview", atom.boolean)
 
 if app.session.member_id then
   unit:load_delegation_info_once_for_member_id(app.session.member_id)
