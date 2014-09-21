@@ -38,7 +38,7 @@ ui.container{ attr = { class = "unit_head" }, content = function()
 
       if detailview then
         if member then
-          slot.put("<br /><i>" .. unit.description .. "</i><br />")
+          slot.put("<br /><i>" .. unit.description .. "</i><br /><br />")
         else
           slot.put("<br /><i>" .. unit.description .. "</i>")
         end
