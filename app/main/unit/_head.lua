@@ -37,7 +37,11 @@ ui.container{ attr = { class = "unit_head" }, content = function()
     ui.container{ attr = { class = "content" }, content = function()
 
       if detailview then
-        slot.put("<br /><i>" .. unit.description .. "</i>")
+        if member then
+          slot.put("<br /><i>" .. unit.description .. "</i><br />")
+        else
+          slot.put("<br /><i>" .. unit.description .. "</i>")
+        end
       end
 
       if member and member:has_voting_right_for_unit_id(unit.id) then
