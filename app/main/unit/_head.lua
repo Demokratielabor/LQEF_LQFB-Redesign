@@ -17,11 +17,13 @@ ui.container{ attr = { class = "unit_head" }, content = function()
         module = "unit", view = "show", id = unit.id,
         attr = { class = "unit_name" }, content = _("unit") .. ": " .. unit.name
       }
+      slot.put("<br /><i>" .. unit.description .. "</i>")
     else
       ui.link{ 
         module = "unit", view = "show", id = unit.id,
         attr = { class = "unit_name" }, content = _"LiquidFeedback" .. " &middot; " .. config.instance_name
       }
+      slot.put("<br /><i>" .. unit.description .. "</i>")
     end
   end }
 

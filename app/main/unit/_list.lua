@@ -12,7 +12,8 @@ ui.container{ attr = { class = "box" }, content = function()
             slot.put("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
           end
           ui.link{ text = unit.name, module = "unit", view = "show", id = unit.id }
-        end 
+          slot.put("<br /><i>" .. unit.description .. "</i>")
+        end
       }
     }
   }
