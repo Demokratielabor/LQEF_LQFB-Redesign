@@ -34,6 +34,10 @@ ui.container{ attr = { class = "unit_head" }, content = function()
   if show_content then
     ui.container{ attr = { class = "content" }, content = function()
 
+      if detailview then
+        slot.put("<br /><i>" .. unit.description .. "</i>")
+      end
+
       if member and member:has_voting_right_for_unit_id(unit.id) then
         if app.session.member_id == member.id then
           ui.tag{ content = _"You have voting privileges for this unit" }
