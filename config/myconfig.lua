@@ -114,7 +114,9 @@ config.mail_reply_to = { name = "LiquidErfurt", address = "liquidfeedback@liquid
 
 -- Supply custom url for avatar/photo delivery
 -- ------------------------------------------------------------------------
--- config.fastpath_url_func = nil
+config.fastpath_url_func = function(member_id, image_type)
+  return request.get_absolute_baseurl() .. "fastpath/getpic?" .. tostring(member_id) .. "+" .. tostring(image_type)
+end
 
 -- Local directory for database dumps offered for download
 -- ------------------------------------------------------------------------
