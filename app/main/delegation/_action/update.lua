@@ -57,6 +57,11 @@ else
     return false
   end
 
+  if trustee and not trustee.realname then
+    slot.put_into("error", _"Trustee has no real name")
+    return false
+  end
+
   if not app.session.member:has_voting_right_for_unit_id(check_unit_id) then
     error("access denied")
   end

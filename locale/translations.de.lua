@@ -612,6 +612,7 @@ return {
 ["Traditional wiki syntax"] = "Traditionelle Wiki-Syntax";
 ["Trustee"] = "Bevollmächtigter";
 ["Trustee has no voting right in this unit"] = "Bevollmächtigter hat kein Stimmrecht in dieser Gliederung";
+["Trustee has no real name"] = "Bevollmächtigter hat keinen bürgerlichen Namen angegeben";
 ["Tuesday"] = "Dienstag";
 ["Unconfirmed address"] = "Unbestätigte E-Mail";
 ["Unit"] = "Gliederung";
