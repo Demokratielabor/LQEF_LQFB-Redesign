@@ -32,6 +32,16 @@ ui.form{
       ui.field.hidden{ name = "step", value = 1 }
       ui.tag{
         tag = "p",
+        content = function()
+          slot.put("Du hast noch keinen Einladungscode? Dann geht es hier weiter:&nbsp;")
+          ui.link{
+            external = "https://liquid-erfurt.org/buergerbeteiligungsplattform/registrierung/",
+            text = "Code anfordern"
+          }
+        end
+      }
+      ui.tag{
+        tag = "p",
         content = _"Please enter the invite code you've received."
       }
       ui.field.text{
