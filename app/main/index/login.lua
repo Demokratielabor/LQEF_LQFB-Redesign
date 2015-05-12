@@ -62,5 +62,14 @@ ui.form{
     ui.submit{
       text = _'Login'
     }
+    ui.tag{
+      tag = "p",
+      content = "Wenn sie ihr Kennwort vergessen haben, bitte hier klicken:"
+    }
+    ui.link{
+      text   = _"Reset password",
+      module = 'index',
+      view   = 'reset_password'
+    }
   end
 }
