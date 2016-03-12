@@ -25,6 +25,12 @@ slot.select('navigation', function()
   if app.session:has_access("anonymous") then
 
     ui.link{
+      content = "Schlagwortsuche",
+      module = 'index',
+      view   = 'custom_search'
+    }
+
+    ui.link{
       content = _"Search",
       module = 'index',
       view   = 'search'
