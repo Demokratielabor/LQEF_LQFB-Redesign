@@ -2,13 +2,13 @@ local search_for = param.get("search_for", atom.string) or "global"
 local search_string = param.get("search", atom.string)
 
 if search_string then
-  slot.put_into("title", encode.html(_("Search results for: '#{search}'", { search  = "thema:" .. search_string })))
+  slot.put_into("title", encode.html(_("Search results for: '#{search}'", { search  = search_string })))
 else
   slot.put_into("title", encode.html(_"Search"))
 end
 
 ui.form{
-  method = "get", module = "index", view = "search",
+  method = "get", module = "index", view = "custom_search",
   routing = { default = { mode = "redirect",
     module = "index", view = "search", search_for = search_for, search = search_string
   } },
@@ -37,6 +37,7 @@ ui.form{
 slot.put("<br />")
 
 if search_string then
+  search_string = "thema:" .. search_string
 
   if app.session:has_access("everything") then
     if search_for == "global" or search_for == "member" then
