@@ -9,7 +9,7 @@ config.instance_name = "Liquid Erfurt"
 
 -- Information about service provider (HTML)
 -- ------------------------------------------------------------------------
-config.app_service_provider = "Liquid Erfurt e.V.<br/>Am Angerberg 1<br />99084 Erfurt<br /><br />Vertreten durch:<br />Philipp Lehmann"
+config.app_service_provider = "Liquid Erfurt e.V.<br/>Am Angerberg 1<br />99084 Erfurt<br /><br />Vertreten durch:<br />Christian Beuster"
 
 
 -- A rocketwiki formatted text the user has to accept while registering
