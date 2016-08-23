@@ -5,7 +5,7 @@ local secret = param.get("secret")
 if not secret then
 
   local member = Member:new_selector()
-    :add_where{ "login = ?", param.get("login") }
+    :add_where{ "login = ? OR notify_email = ?", param.get("login"), param.get("login") }
     :add_where("password_reset_secret ISNULL OR password_reset_secret_expiry < now()")
     :optional_object_mode()
     :exec()

@@ -632,6 +632,7 @@ return {
 ["Traditional wiki syntax"] = false;
 ["Trustee"] = false;
 ["Trustee has no voting right in this unit"] = false;
+["Trustee has no real name"] = false;
 ["Tuesday"] = false;
 ["Unconfirmed address"] = false;
 ["Unit"] = false;

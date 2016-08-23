@@ -63,6 +63,8 @@ filters.content = function()
     for i, event in ipairs(events) do
       last_event_id = event.id
 
+      ui.container{ attr = { class = "eventblock" }, content = function() -- event wrapper-div
+
       ui.container{ attr = { class = "event_info" }, content = function()
         local event_name = event.event_name
         local event_image
@@ -143,12 +145,12 @@ filters.content = function()
         ui.container{ attr = { class = "content" }, content = function()
           ui.link{
             module = "unit", view = "show", id = event.issue.area.unit_id,
-            attr = { class = "unit_link" }, text = event.issue.area.unit.name
+            attr = { class = "unit_link" }, text = _("unit") .. ": " .. event.issue.area.unit.name
           }
           slot.put(" ")
           ui.link{
             module = "area", view = "show", id = event.issue.area_id,
-            attr = { class = "area_link" }, text = event.issue.area.name
+            attr = { class = "area_link" }, text = _("area") .. ": " .. event.issue.area.name
           }
         end }
         
@@ -195,6 +197,9 @@ filters.content = function()
           end
         end }
       end }
+
+      end } -- event wrapper-div
+
     end
 
   end }

@@ -7,11 +7,11 @@ app.html_title.subtitle = _("Area")
 util.help("area.show")
 
 slot.select("head", function()
-  execute.view{ module = "area", view = "_head", params = { area = area, show_content = true, member = app.session.member } }
+  execute.view{ module = "area", view = "_head", params = { area = area, show_content = true, member = app.session.member, detailview = true } }
 end)
 
 ui.container{
-  attr = { class = "vertical"},
+  attr = { class = "vertical area_desc"},
   content = function()
     ui.field.text{ value = area.description }
   end

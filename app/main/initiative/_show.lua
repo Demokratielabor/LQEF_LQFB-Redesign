@@ -68,10 +68,10 @@ ui.container{ attr = { class = class }, content = function()
       module = "initiative", view = "show", id = initiative.id
     }
   else
-    ui.container{ attr = { class = "title" }, content = text }
+    ui.container{ attr = { class = "title init_title_single" }, content = text }
   end
   if app.session:has_access("authors_pseudonymous") then
-    ui.container{ attr = { class = "content" }, content = function()
+    ui.container{ attr = { class = "content init_author" }, content = function()
       ui.tag{
         attr = { class = "initiator_names" },
         content = function()
@@ -180,7 +180,7 @@ ui.container{ attr = { class = class }, content = function()
   end
 
   if app.session.member_id then
-    ui.container{ attr = { class = "content" }, content = function()
+    ui.container{ attr = { class = "content init_supporter" }, content = function()
       execute.view{
         module = "supporter",
         view = "_show_box",
@@ -366,7 +366,7 @@ ui.container{ attr = { class = class }, content = function()
   if not show_as_head then
     local drafts_count = initiative:get_reference_selector("drafts"):count()
 
-    ui.container{ attr = { class = "content" }, content = function()
+    ui.container{ attr = { class = "content init_edit" }, content = function()
     
       if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
         ui.link{

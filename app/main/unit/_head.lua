@@ -3,6 +3,8 @@ local member = param.get("member", "table")
 
 local show_content = param.get("show_content", atom.boolean)
 
+local detailview = param.get("detailview", atom.boolean)
+
 if app.session.member_id then
   unit:load_delegation_info_once_for_member_id(app.session.member_id)
 end
@@ -15,18 +17,32 @@ ui.container{ attr = { class = "unit_head" }, content = function()
     if not config.single_unit_id then
       ui.link{ 
         module = "unit", view = "show", id = unit.id,
-        attr = { class = "unit_name" }, content = unit.name
+        attr = { class = "unit_name" }, content = _("unit") .. ": " .. unit.name
       }
+      if not detailview then
+        slot.put("<br /><i>" .. unit.description .. "</i>")
+      end
     else
       ui.link{ 
         module = "unit", view = "show", id = unit.id,
         attr = { class = "unit_name" }, content = _"LiquidFeedback" .. " &middot; " .. config.instance_name
       }
+      if not detailview then
+        slot.put("<br /><i>" .. unit.description .. "</i>")
+      end
     end
   end }
 
   if show_content then
     ui.container{ attr = { class = "content" }, content = function()
+
+      if detailview then
+        if member then
+          slot.put("<br /><i>" .. unit.description .. "</i><br /><br />")
+        else
+          slot.put("<br /><i>" .. unit.description .. "</i>")
+        end
+      end
 
       if member and member:has_voting_right_for_unit_id(unit.id) then
         if app.session.member_id == member.id then

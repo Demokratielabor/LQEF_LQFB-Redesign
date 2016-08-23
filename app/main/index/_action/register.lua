@@ -1,7 +1,7 @@
 local code = util.trim(param.get("code"))
 
 local member = Member:new_selector()
-  :add_where{ "invite_code = ?", code }
+  :add_where{ "invite_code = ?", code:gsub(" ", "") }
   :add_where{ "activated ISNULL" }
   :add_where{ "NOT locked" }
   :optional_object_mode()
