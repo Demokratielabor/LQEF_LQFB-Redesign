@@ -23,4 +23,12 @@ ui.tag{ tag = "ul", content = function()
       view = "member_list",
     }
   end }
+  ui.tag{ tag= "li", content = function()
+    ui.link{
+      text = _"Cancel issue",
+      module = "admin",
+      view = "cancel_issue",
+    }
+  end }
 end }
+

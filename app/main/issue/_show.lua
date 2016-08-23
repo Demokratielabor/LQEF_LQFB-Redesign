@@ -250,13 +250,34 @@ ui.container{ attr = { class = class }, content = function()
   end }
 
   if not for_listing then
+    if issue.state == "canceled_by_admin" then
+      ui.container{
+        attr = { class = "not_admitted_info" },
+        content = function()
+          ui.container{ content = _("This issue has been canceled by administrative intervention.") }
+          slot.put("<br />")
+          if issue.admin_notice then
+            ui.container{ content = function() slot.put(encode.html_newlines(issue.admin_notice)) end }
+          end
+        end
+      }
+    elseif issue.admin_notice then
+      ui.container{
+        attr = { class = "not_admitted_info" },
+        content = function() slot.put(encode.html_newlines(issue.admin_notice)) end
+      }
+    end
+    
     if issue.state == "canceled_issue_not_accepted" then
       local policy = issue.policy
       ui.container{
         attr = { class = "not_admitted_info" },
         content = _("This issue has been canceled. It failed the quorum of #{quorum}.", { quorum = format.percentage(policy.issue_quorum_num / policy.issue_quorum_den) })
       }
-    elseif issue.state:sub(1, #("canceled_")) == "canceled_" then
+    elseif
+      issue.state:sub(1, #("canceled_")) == "canceled_" and 
+      issue.state ~= "canceled_by_admin"
+    then
       ui.container{
         attr = { class = "not_admitted_info" },
         content = _("This issue has been canceled.")

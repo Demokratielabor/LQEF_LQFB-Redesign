@@ -23,6 +23,9 @@ int main(int argc, const char * const *argv) {
   const char *sql_member_image_params[2];
 
 #ifndef PUBLIC_ACCESS
+#ifdef PUBLIC_AVATAR_ACCESS
+  int authorization_required = 0;
+#endif
   char *cookies;
   regex_t session_ident_regex;
   ssize_t start, length;
@@ -35,40 +38,48 @@ int main(int argc, const char * const *argv) {
   PGresult *dbr;
 
   args_string = getenv("QUERY_STRING");
-#ifdef PUBLIC_ACCESS
   if (!args_string) {
     fputs("Status: 403 Access Denied\n\n", stdout);
     return 0;
   }
-#else
-  cookies = getenv("HTTP_COOKIE");
-  if (!args_string || !cookies) {
-    fputs("Status: 403 Access Denied\n\n", stdout);
-    return 0;
-  }
-#endif
 
   member_id   = strtok(args_string, "+");
   image_type  = strtok(NULL, "+");
+  if (!member_id || !image_type) {
+    fputs("Status: 403 Access Denied\n\n", stdout);
+    return 0;
+  }
   sql_member_image_params[0] = member_id;
   sql_member_image_params[1] = image_type;
 
 #ifndef PUBLIC_ACCESS
-  if (regcomp(&session_ident_regex, "(^|[; \t])liquid_feedback_session=([0-9A-Za-z]+)", REG_EXTENDED) != 0) {
-    // shouldn't happen
-    abort();
+#ifdef PUBLIC_AVATAR_ACCESS
+  if (strcmp(image_type, "avatar")) {
+    authorization_required = 1;
+#endif
+    cookies = getenv("HTTP_COOKIE");
+    if (!args_string || !cookies) {
+      fputs("Status: 403 Access Denied\n\n", stdout);
+      return 0;
+    }
+    if (regcomp(&session_ident_regex, "(^|[; \t])liquid_feedback_session=([0-9A-Za-z]+)", REG_EXTENDED) != 0) {
+      // shouldn't happen
+      abort();
+    }
+    if (regexec(&session_ident_regex, cookies, 3, session_ident_regmatch, 0) != 0) {
+      fputs("Status: 403 Access Denied\n\n", stdout);
+      return 0;
+    }
+    start = session_ident_regmatch[2].rm_so;
+    length = session_ident_regmatch[2].rm_eo - session_ident_regmatch[2].rm_so;
+    session_ident = malloc(length + 1);
+    if (!session_ident) abort();  // shouldn't happen
+    strncpy(session_ident, cookies + start, length);
+    session_ident[length] = 0;
+    sql_session_params[0] = session_ident;
+#ifdef PUBLIC_AVATAR_ACCESS
   }
-  if (regexec(&session_ident_regex, cookies, 3, session_ident_regmatch, 0) != 0) {
-    fputs("Status: 403 Access Denied\n\n", stdout);
-    return 0;
-  }
-  start = session_ident_regmatch[2].rm_so;
-  length = session_ident_regmatch[2].rm_eo - session_ident_regmatch[2].rm_so;
-  session_ident = malloc(length + 1);
-  if (!session_ident) abort();  // shouldn't happen
-  strncpy(session_ident, cookies + start, length);
-  session_ident[length] = 0;
-  sql_session_params[0] = session_ident;
+#endif
 #endif
 
   conn = PQconnectdb(GETPIC_CONNINFO);
@@ -83,20 +94,26 @@ int main(int argc, const char * const *argv) {
   }
 
 #ifndef PUBLIC_ACCESS
-  dbr = PQexecParams(conn,
-    "SELECT NULL FROM session JOIN member ON member.id = session.member_id WHERE session.ident = $1 AND member.active",
-    1, NULL, sql_session_params, NULL, NULL, 0
-  );
-  if (PQresultStatus(dbr) != PGRES_TUPLES_OK) {
-    fputs(PQresultErrorMessage(dbr), stderr);
-    PQfinish(conn);
-    return 1;
+#ifdef PUBLIC_AVATAR_ACCESS
+  if (authorization_required) {
+#endif
+    dbr = PQexecParams(conn,
+      "SELECT NULL FROM session JOIN member ON member.id = session.member_id WHERE session.ident = $1 AND member.active",
+      1, NULL, sql_session_params, NULL, NULL, 0
+    );
+    if (PQresultStatus(dbr) != PGRES_TUPLES_OK) {
+      fputs(PQresultErrorMessage(dbr), stderr);
+      PQfinish(conn);
+      return 1;
+    }
+    if (PQntuples(dbr) != 1) {
+      fputs("Status: 403 Access Denied\n\n", stdout);
+      PQfinish(conn);
+      return 0;
+    }
+#ifdef PUBLIC_AVATAR_ACCESS
   }
-  if (PQntuples(dbr) != 1) {
-    fputs("Status: 403 Access Denied\n\n", stdout);
-    PQfinish(conn);
-    return 0;
-  }
+#endif
 #endif
 
   dbr = PQexecParams(conn,

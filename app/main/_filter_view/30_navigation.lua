@@ -10,7 +10,7 @@ slot.select('navigation', function()
     view   = 'index'
   }
   
-  if app.session:has_access("anonymous") then
+  if app.session:has_access("anonymous") and not (app.session.needs_delegation_check) then
 
     ui.link{
       content = _"Search",
@@ -38,11 +38,6 @@ slot.select('navigation', function()
       text   = _"Registration",
       module = 'index',
       view   = 'register'
-    }
-    ui.link{
-      text   = _"Reset password",
-      module = 'index',
-      view   = 'reset_password'
     }
   end
 end)
