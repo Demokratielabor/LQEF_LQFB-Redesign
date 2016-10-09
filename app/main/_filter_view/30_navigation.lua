@@ -17,7 +17,8 @@ slot.select('navigation', function()
       params = {
         tab = "open",
         filter = "frozen",
-        filter_voting = "not_voted"
+        filter_voting = "not_voted",
+        filter_interest = "area"
       }
     }
   end
