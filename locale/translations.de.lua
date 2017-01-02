@@ -581,7 +581,7 @@ return {
 ["Support this initiative"] = "Diese Initiative unterstützen";
 ["Supported"] = "Unterstützt";
 ["Supporters"] = "Unterstützer";
-["Supporters (before begin of voting)"] = "Unterstützer (zum Abstimmungesbeginn)";
+["Supporters (before begin of voting)"] = "Unterstützer (zum Abstimmungsbeginn)";
 ["Syntax help"] = "Syntax-Hilfe";
 ["Terms of use"] = "Nutzungsbedingungen";
 ["The code you've entered is invalid"] = "Der Code, den Du eingeben hast, ist nicht gültig!";
